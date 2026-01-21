@@ -16,10 +16,11 @@ jobs:
               cache: 'maven'
 
           - name: Build with Maven
-            run: mvn -q clean package
+            run: mvn clean package
 
           - name: Run the application
-            run: nohup java -jar target/formation-cicd-test-tp-03-solution-1.0-SNAPSHOT.jar > ../app.log 2>&1 &
+            run: nohup java -jar target/formation-cicd-test-tp-03-1.0-SNAPSHOT.jar > app.log 2>&1 &
+            working-directory: ${{ github.workspace }}
 
           - name: Wait for API to be ready
             run: |
@@ -32,7 +33,7 @@ jobs:
                 sleep 2
               done
               echo "API not ready"
-              tail -n 200 app.log || true
+              tail -n 200 ${{ github.workspace }}/app.log || true
               exit 1
 
           - name: Run API tests (Hurl via Docker)
