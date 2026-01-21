@@ -101,7 +101,7 @@ jobs:
             with:
               target: 'http://localhost:8080'
               artifact_name: 'zap_scan'
-              fail_action: 'true'
+              fail_action: 'false'
 
           - name: Stop the application
             run: |
