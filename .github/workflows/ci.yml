@@ -112,3 +112,9 @@ jobs:
               else
                 echo "No application running on port 8080."
               fi
+
+          - name: Archive ZAP scan reports
+            uses: actions/upload-artifact@v6
+            with:
+              name: zap-scan-report
+              path: 'report_*.*'
